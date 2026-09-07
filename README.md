@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Layag Batangas
+
+Layag Batangas is a Next.js tourism site for showcasing places to visit across Batangas. It includes a split hero section, featured destination cards powered by spot objects, travel stories, a login modal in the navbar, a footer, and an embedded Flowise chatbot.
+
+## Features
+
+- Hero section with left-aligned intro text and a 3-image slideshow
+- Featured destinations section driven by `lib/spots.ts`
+- Stories section with editorial-style cards
+- Navbar with a login modal for email/password plus Gmail and Facebook sign-in actions
+- Global footer with contact and quick links
+- Flowise chatbot embedded in the shared layout
+
+## Tech Stack
+
+- Next.js 16
+- React 19
+- TypeScript
+- Tailwind CSS v4
+- shadcn/ui and Base UI primitives
 
 ## Getting Started
 
-First, run the development server:
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Open the app:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Project Structure
 
-## Learn More
+- `app/layout.tsx` - shared app shell, fonts, navbar, footer, and chatbot embed
+- `app/page.tsx` - homepage composition
+- `app/sections/hero-section.tsx` - hero with slideshow
+- `app/sections/featured-destionations.tsx` - featured destination cards
+- `app/sections/stories-section.tsx` - stories layout
+- `components/navbar.tsx` - navbar and login modal
+- `app/components/footer.tsx` - footer component
+- `lib/spots.ts` - destination objects
 
-To learn more about Next.js, take a look at the following resources:
+## Notes
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Images are loaded from the `public/` folder.
+- The Flowise chatbot is initialized globally from the shared layout.
+- The navbar CTA opens the login modal instead of navigating to a section.
