@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Fraunces, Work_Sans } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 import Navbar from "../components/navbar";
+import { TripPlannerProvider } from "../components/trip-planner";
+import TravelAssistant from "../components/travel-assistant";
 import Footer from "./components/footer";
 
 const fraunces = Fraunces({
@@ -19,7 +20,8 @@ const workSans = Work_Sans({
 
 export const metadata: Metadata = {
   title: "Layag Batangas",
-  description: "Discover the beaches, heritage towns, and dive spots of Batangas.",
+  description:
+    "Discover the beaches, heritage towns, and dive spots of Batangas.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -29,21 +31,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${fraunces.variable} ${workSans.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">
-        <Navbar />
-        {children}
-        <Footer />
-        <Script
-          id="flowise-chatbot"
-          type="module"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `import Chatbot from "https://cdn.jsdelivr.net/npm/flowise-embed/dist/web.js";
-Chatbot.init({
-  chatflowid: "d117bb6a-dadf-4421-8030-4a3450db41b9",
-  apiHost: "https://cloud.flowiseai.com",
-});`,
-          }}
-        />
+        <TripPlannerProvider>
+          <Navbar />
+          {children}
+          <Footer />
+          <TravelAssistant />
+        </TripPlannerProvider>
       </body>
     </html>
   );
