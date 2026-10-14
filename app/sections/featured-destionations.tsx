@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { spots } from "@/lib/spots";
+import { getSpotSlug, spots } from "@/lib/spots";
 import { AddToTripButton } from "@/components/trip-planner";
 
 export default function FeaturedDestinations() {
@@ -69,20 +69,23 @@ export default function FeaturedDestinations() {
               key={spot.name}
               className="group overflow-hidden rounded-[1.75rem] border border-border/70 bg-background shadow-[0_20px_60px_-42px_rgba(0,0,0,0.35)] transition-transform duration-300 hover:-translate-y-1"
             >
-              <div className="relative aspect-4/3 overflow-hidden bg-muted">
-                <Image
-                  src={spot.image}
-                  alt={spot.name}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute left-4 top-4 rounded-full bg-black/65 px-3 py-1 text-xs font-semibold uppercase tracking-[0.26em] text-white backdrop-blur">
-                  {spot.category}
+              <Link
+                href={`/destinations/${getSpotSlug(spot.name)}`}
+                className="block"
+              >
+                <div className="relative aspect-4/3 overflow-hidden bg-muted">
+                  <Image
+                    src={spot.image}
+                    alt={spot.name}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute left-4 top-4 rounded-full bg-black/65 px-3 py-1 text-xs font-semibold uppercase tracking-[0.26em] text-white backdrop-blur">
+                    {spot.category}
+                  </div>
                 </div>
-              </div>
 
-              <div className="space-y-4 p-6">
-                <div>
+                <div className="space-y-4 px-6 pt-6">
                   <h3 className="text-2xl font-semibold tracking-tight text-foreground">
                     {spot.name}
                   </h3>
@@ -90,18 +93,18 @@ export default function FeaturedDestinations() {
                     {spot.description}
                   </p>
                 </div>
+              </Link>
 
-                <div className="flex flex-wrap items-center gap-3">
-                  <AddToTripButton spot={spot} />
-                  <Link
-                    href={mapUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex h-10 items-center text-sm font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-primary"
-                  >
-                    Open in maps
-                  </Link>
-                </div>
+              <div className="flex flex-wrap items-center gap-3 p-6 pt-4">
+                <AddToTripButton spot={spot} />
+                <Link
+                  href={mapUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex h-10 items-center text-sm font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-primary"
+                >
+                  Open in maps
+                </Link>
               </div>
             </article>
           );

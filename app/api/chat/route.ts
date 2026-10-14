@@ -9,6 +9,22 @@ type ChatMessage = {
 
 const model = "gemini-3.8-flash";
 
+async function fetchGemini(url: string, options: RequestInit) {
+  const response = await fetch(url, options);
+
+  if (response.status !== 429) {
+    return response;
+  }
+
+  const retryAfterSeconds = Number(response.headers.get("retry-after"));
+  const waitMs = Number.isFinite(retryAfterSeconds)
+    ? Math.min(Math.max(retryAfterSeconds * 1000, 250), 1500)
+    : 500;
+
+  await new Promise((resolve) => setTimeout(resolve, waitMs));
+  return fetch(url, options);
+}
+
 export async function POST(request: Request) {
   const apiKey = process.env.GEMINI_API_KEY;
 
@@ -34,7 +50,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const response = await fetch(
+    const response = await fetchGemini(
       `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
       {
         method: "POST",

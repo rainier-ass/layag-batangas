@@ -9,6 +9,17 @@ export type Spot = {
   };
 };
 
+export function getSpotSlug(name: string) {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
+export function getSpotBySlug(slug: string) {
+  return spots.find((spot) => getSpotSlug(spot.name) === slug);
+}
+
 export const spots: Spot[] = [
   {
     name: "Laiya Beach",

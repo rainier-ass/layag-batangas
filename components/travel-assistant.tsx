@@ -315,7 +315,7 @@ export default function TravelAssistant() {
         type="button"
         onClick={() => setIsOpen((currentState) => !currentState)}
         aria-label={isOpen ? "Close travel assistant" : "Open travel assistant"}
-        className="fixed bottom-5 right-5 z-40 flex size-14 items-center justify-center rounded-full bg-[#E0703A] text-white shadow-[0_16px_40px_-16px_rgba(14,59,67,0.65)] transition-transform hover:-translate-y-1"
+        className="fixed bottom-5 right-5 z-40 flex size-14 items-center justify-center rounded-full bg-[#0E3B43] text-[#F5EFE2] shadow-[0_16px_40px_-16px_rgba(14,59,67,0.65)] transition-transform hover:-translate-y-1"
       >
         {isOpen ? (
           <X className="size-5" />
